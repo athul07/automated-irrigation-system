@@ -1,0 +1,25 @@
+.dropdown{
+    .dropdown-toggle{
+        color: #ffffff;
+        text-decoration: none;
+    }
+    .dropdown-menu{
+        padding: 15px;
+        background-color: #343a40;
+        li{
+            padding: 7px;
+        }
+        li a{
+            color: #ffffff;
+            text-decoration: none;
+            width: 100%;
+        }
+        li:hover{
+            background-color: #434c55;
+            cursor: pointer;
+        }
+    }
+}
+.navbar-brand{
+    margin-right: 30px;
+}
