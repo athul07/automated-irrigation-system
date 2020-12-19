@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-5 text-center">
+            <div class="dashboard-card">
+                <div class="card-body">
+                    <p class="card-heading">WATER IN DAM</p>
+                    <p class="card-value value-in">1100 <span>Unit</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 text-center">
+            <div class="dashboard-card">
+                <div class="card-body">
+                    <p class="card-heading">TOTAL REQUEST</p>
+                    <p class="card-value value-out">100 <span>Unit</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary generate-button" (click)="isGenerated = !isGenerated">Generate</button>
+        </div>
+    </div>
+    <div class="row mt-5" *ngIf="isGenerated">
+        <div class="col-md-5 text-center">
+            <div class="dashboard-card">
+                <div class="card-body">
+                    <p class="card-heading">WATER FLOWING</p>
+                    <p class="card-value value-in">10 <span>Unit/min</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 text-center">
+            <div class="dashboard-card">
+                <div class="card-body">
+                    <p class="card-heading">TIME REMAINING</p>
+                    <p class="card-value value-out">10 <span>Min</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
