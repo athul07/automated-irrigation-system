@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
-    <a class="navbar-brand" [routerLink]="['/dashboard']">
+    <a class="navbar-brand" [routerLink]="(userDetails.user_type === 'admin') ? ['/dashboard'] : ['/request']">
         <img src="../../../assets/images/water-drops.svg" width="30" height="30" alt="logo">
         Irrigation System
     </a>
@@ -7,7 +7,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar-list-2">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" *ngIf="userDetails.user_type === 'admin'">
             <li class="nav-item" [routerLinkActive]="['active']">
                 <a class="nav-link" [routerLink]="['/dashboard']">Dashboard <span class="sr-only">(current)</span></a>
             </li>
@@ -16,6 +16,17 @@
             </li>
             <li class="nav-item" [routerLinkActive]="['active']">
                 <a class="nav-link" [routerLink]="['/users']">Users</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav" *ngIf="userDetails.user_type === 'user'">
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/request']">Request <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/consumption']">Consumption</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/message']">Message</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right ml-auto mr-3">

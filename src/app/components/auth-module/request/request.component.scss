@@ -1,0 +1,44 @@
+.dashboard-card{
+    border-radius: 8px;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
+    background-color: #fff;
+    padding: 1em;
+    height: 278px;
+    position: relative;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    .card-heading{
+        font-size: 22px;
+    }
+    .card-value{
+        font-size: 64px;
+        font-weight: 600;
+        
+        span{
+            font-size: 32px;
+            // color: #000000;
+        }
+    }
+    .value-in{
+        color: #008ddf;
+    }
+    .value-out{
+        color: #58fb00;
+    }
+}
+.generate-button{
+    position: absolute;
+    bottom: 0;
+    width: 70%;
+    height: 50px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}

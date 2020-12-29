@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IndividualComponent } from './individual/individual.component';
 import { UsersComponent } from './users/users.component';
+import { RequestComponent } from './request/request.component';
+import { ConsumptionComponent } from './consumption/consumption.component';
+import { MessageComponent } from './message/message.component';
 
 const routes: Routes = [
   {
@@ -18,6 +21,18 @@ const routes: Routes = [
     path: 'users',
     component: UsersComponent,
   },
+  {
+    path: 'request',
+    component: RequestComponent,
+  },
+  {
+    path: 'consumption',
+    component: ConsumptionComponent,
+  },
+  {
+    path: 'message',
+    component: MessageComponent,
+  }
 ];
 
 @NgModule({

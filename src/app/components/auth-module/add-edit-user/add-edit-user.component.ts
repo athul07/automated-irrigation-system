@@ -1,36 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../shared/services/auth.service';
-import { Router } from "@angular/router";
+import { MatDialogRef, MatDialog } from "@angular/material/dialog";
+import { UserService } from '../../../services/user.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-add-edit-user',
+  templateUrl: './add-edit-user.component.html',
+  styleUrls: ['./add-edit-user.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class AddEditUserComponent implements OnInit {
   email: string = '';
   password: string = '';
+  address: string = '';
+  meterId: string = '';
+  phone: number;
+  name: string = '';
+  data: any;
+
   errorMessage: string = '';
   error: { name: string, message: string } = { name: '', message: '' };
 
   constructor(
-    private authService: AuthService,
-    private router: Router
-    ) { }
+    public dialogRef: MatDialogRef<AddEditUserComponent>,
+    private authService: UserService,
+  ) { }
 
   ngOnInit(): void {
   }
 
   register(){
+    this.data = {
+      name: this.name,
+      phone: this.phone,
+      address: this.address,
+      email: this.email,
+      meter_id: this.meterId,
+      user_type: 'user',
+      password: this.password,
+      added_at: new Date()
+    }
     this.clearErrorMessage();
     if(this.validateForm(this.email, this.password) ){
-      this.authService.registerWithEmail(this.email, this.password).then((x)=>{
-        console.log('registerrr', x)
+      this.authService.registerWithEmail(this.email, this.password, this.data).then(()=>{
+        console.log('registerrr')
         // this.router.navigate[('/home')]
       }).catch(_error => {
         this.error = _error;
         console.log(this.error)
-        this.router.navigate[('/register')]
+        // this.router.navigate[('/register')]
       })
     }
   }
@@ -54,5 +70,4 @@ export class RegisterComponent implements OnInit {
     }
     return true;
   }
-
 }

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
@@ -9,20 +10,23 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { environment } from 'src/environments/environment';
 
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from "@angular/material/dialog";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
+import { DeleteComponent } from './messages/delete/delete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { AuthLayoutComponent } from './components/auth-layout/auth-layout.compon
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-5 text-center">
+            <div class="dashboard-card">
+                <div class="card-body" *ngIf="requestResponse.length !== 0">
+                    <p class="card-heading">REQUESTED WATER</p>
+                    <p class="card-value value-in">{{requestResponse[0].payload.doc.data().request_value}} <span>Unit</span></p>
+                </div>
+                <div class="card-body" *ngIf="requestResponse.length === 0">
+                    <div class="form-group p-2">
+                        <p class="card-heading">REQUEST WATER</p>
+                        <div style="position: relative;">
+                            <input type="number" name="login" class="form-control mt-4 mx-auto" style="width: 200px;" [(ngModel)]="requestData" required>
+                            <div class="mx-auto" style="width: 200px; text-align: end; font-size: 12px; color: rgba(24, 23, 23, 0.808);">Unit Needed</div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary mt-4" [disabled]="!requestData" (click)="sendRequest()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-md-5 text-center">
+            <div class="dashboard-card">
+                <div class="card-body">
+                    <p class="card-heading">TOTAL REQUEST</p>
+                    <p class="card-value value-out">100 <span>Unit</span></p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

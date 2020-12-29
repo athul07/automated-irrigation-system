@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
 import { DataService } from '../../shared/services/data.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore,
     private router: Router,
     private dataService: DataService
     ) {
@@ -38,6 +40,7 @@ export class AuthService {
   registerWithEmail(email: string, password: string){
     return this.afAuth.createUserWithEmailAndPassword(email, password).then((user)=>{
       this.authState = user;
+      console.log("aaa", this.authState.user.uid)
     }).catch(error=>{
       console.log(error);
       throw error;
@@ -47,21 +50,38 @@ export class AuthService {
   loginWithEmail(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password).then((user)=>{
       this.authState = user;
-      this.dataService.setUser(this.authState.user);
+      console.log('rrr', this.authState.user.uid);
+
+      this.dataService.setStorage('loginData' ,this.authState.user);
       this.dataService.setStorage('isLoggedIn', { isLoggedIn: true});
-      console.log(this.authState)
+
+      this.getActiveUser(this.authState.user.uid).subscribe((res: any)=>{
+        this.dataService.setUser(res[0].payload.doc.data());
+        if (res[0].payload.doc.data().user_type === 'admin') {
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          this.router.navigateByUrl('/request');
+        }
+        
+      })
     }).catch(error=>{
       console.log(error);
       throw error;
     })
   }
 
+  getActiveUser(uid){
+    return this.firestore.collection('users', ref => ref.where('userid', '==', uid)).snapshotChanges();
+  }
+
   signOut():void {
     this.afAuth.signOut();
+    this.dataService.removeStorage('loginData');
     this.dataService.removeStorage('user');
     this.dataService.removeStorage('isLoggedIn');
     localStorage.clear();
     this.router.navigate(['/login']);
+    window.location.reload();
   }
 
 }
