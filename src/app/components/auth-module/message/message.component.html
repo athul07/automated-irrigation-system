@@ -1,1 +1,29 @@
-<p>message works!</p>
+<div class="container-fluid">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-5 text-center">
+            <div class="dashboard-card">
+                <div class="card-body" *ngIf="!(user.user_type === 'admin')">
+                    <p class="card-heading" *ngIf="messageList.length === 0">No Message</p>
+                    <div *ngIf="messageList.length !== 0">
+                        <label><strong><u>Messages</u> </strong></label>
+                        <li style="display: flex;" *ngFor="let msg of messageList; let i = index">
+                            <ul>> {{msg.payload.doc.data().message}}</ul>
+                        </li>
+                    </div>
+                </div>
+                <div class="card-body d-block" *ngIf="(user.user_type === 'admin')">
+                    <label><strong>Message</strong></label>
+                    <textarea 
+                        style="width: 100%;"
+                        rows="3" 
+                        placeholder="Type here.."
+                        maxlength="1000"
+                        [(ngModel)]="message"
+                    >
+                    </textarea>
+                    <button style="float: left;" type="button" class="btn btn-primary" (click)="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

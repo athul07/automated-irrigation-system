@@ -4,16 +4,16 @@
             <div class="dashboard-card">
                 <div class="card-body">
                     <p class="card-heading">WATER IN DAM</p>
-                    <p class="card-value value-in">1100 <span>Unit</span></p>
+                    <p class="card-value value-in">{{waterInDam[0]?.payload.doc.data().water_level}} <span>Unit</span></p>
                 </div>
             </div>
         </div>
 
         <div class="col-md-5 text-center">
             <div class="dashboard-card">
-                <div class="card-body">
+                <div class="card-body"> 
                     <p class="card-heading">TOTAL REQUEST</p>
-                    <p class="card-value value-out">100 <span>Unit</span></p>
+                    <p class="card-value value-out">{{totalRequest ? totalRequest : 0}}<span>Unit</span></p>
                 </div>
             </div>
         </div>

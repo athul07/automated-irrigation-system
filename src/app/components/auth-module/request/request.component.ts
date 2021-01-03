@@ -30,6 +30,8 @@ export class RequestComponent implements OnInit {
     this.data = {
       date: this.today,
       uid: this.user.userid,
+      name: this.user.name,
+      meter_id: this.user.meter_id,
       request_value: this.requestData
     }
     this.requestService.sendRequest(this.data).then(()=>{

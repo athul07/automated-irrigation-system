@@ -17,6 +17,9 @@
             <li class="nav-item" [routerLinkActive]="['active']">
                 <a class="nav-link" [routerLink]="['/users']">Users</a>
             </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['/message']">Message</a>
+            </li>
         </ul>
         <ul class="navbar-nav" *ngIf="userDetails.user_type === 'user'">
             <li class="nav-item" [routerLinkActive]="['active']">

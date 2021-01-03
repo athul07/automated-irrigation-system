@@ -1,1 +1,20 @@
-<p>individual works!</p>
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">NAME</th>
+                <th scope="col">METER ID</th>
+                <th scope="col">REQUESTED VALUE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let request of requestList; let i = index">
+                <th class="align-middle" scope="row">{{i+1}}</th>
+                <td class="align-middle">{{ request.payload.doc.data().name }}</td>
+                <td class="align-middle">{{ request.payload.doc.data().meter_id }}</td>
+                <td class="align-middle">{{ request.payload.doc.data().request_value }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

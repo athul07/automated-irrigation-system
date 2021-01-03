@@ -10,7 +10,7 @@ import { DeleteComponent } from '../../../messages/delete/delete.component';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  userList: any;
+  userList: any[] = [];
 
   constructor(
     private dialog: MatDialog,
