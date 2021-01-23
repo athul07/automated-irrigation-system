@@ -41,11 +41,12 @@ export class AddEditUserComponent implements OnInit {
     this.clearErrorMessage();
     if(this.validateForm(this.email, this.password) ){
       this.authService.registerWithEmail(this.email, this.password, this.data).then(()=>{
-        console.log('registerrr')
+        // console.log('registerrr')
+        this.dialogRef.close();
         // this.router.navigate[('/home')]
       }).catch(_error => {
         this.error = _error;
-        console.log(this.error)
+        alert(this.error)
         // this.router.navigate[('/register')]
       })
     }

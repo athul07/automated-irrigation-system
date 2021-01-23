@@ -11,6 +11,7 @@ import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { RequestComponent } from './request/request.component';
 import { ConsumptionComponent } from './consumption/consumption.component';
 import { MessageComponent } from './message/message.component';
+import { GenerateComponent } from './generate/generate.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MessageComponent } from './message/message.component';
     AddEditUserComponent,
     RequestComponent,
     ConsumptionComponent,
-    MessageComponent
+    MessageComponent,
+    GenerateComponent
   ],
   imports: [
     CommonModule,

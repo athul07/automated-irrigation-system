@@ -42,4 +42,17 @@ export class RequestService {
     });
   }
 
+  generateAction(data) {
+    return new Promise<any>((resolve, reject) => {
+      this.firestore
+        .collection('generate')
+        .add(data)
+        .then(res => { resolve(res); }, err => reject(err));
+    });
+  }
+
+  getGeneratedData(addedAt) {
+    return this.firestore.collection('generate', (ref) => ref.where('date', '==', addedAt)).snapshotChanges();
+  }
+
 }

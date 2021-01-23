@@ -1,4 +1,5 @@
-<div class="container">
+<app-au-auth-layout></app-au-auth-layout>
+<!-- <div class="container">
     <div class="row justify-content-center p-4">
         <div class="col-md-6">
             <h3 class="p-2">Login</h3>
@@ -22,5 +23,47 @@
                 </div>
             </form>
         </div>
+    </div>
+</div> -->
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-6 d-none d-md-flex bg-image">
+            <img style="width: 60%; margin: auto;" src="./assets/images/login.svg" alt="login" width="100" class="">
+        </div>
+
+
+        <!-- The content half -->
+        <div class="col-md-6 bg-light">
+            <div class="login d-flex align-items-center py-5">
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3 class="display-4">Login!</h3>
+                            <p class="text-muted mb-4">Please login to your account</p>
+                            <form (ngSubmit)=login()>
+                                <div class="form-group mb-3">
+                                    <input id="inputEmail" type="email" name="login" placeholder="Email address" [(ngModel)]="email" required autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input id="inputPassword" type="password" name="login" placeholder="Password" [(ngModel)]="password" required class="form-control rounded-pill border-0 shadow-sm px-4">
+                                </div>
+                                <div class="p-2">
+                                    <p *ngIf="errorMessage.length > 0" class="text-danger">
+                                        {{errorMessage}}
+                                    </p>
+                                    <p *ngIf="error.message.length > 0" class="text-danger">
+                                        {{error.message}}
+                                    </p>
+                                </div>
+                                <button type="submit" style="background-color: #212529a8; border-color: #656666;" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign in</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End -->
+            </div>
+        </div><!-- End -->
+
     </div>
 </div>

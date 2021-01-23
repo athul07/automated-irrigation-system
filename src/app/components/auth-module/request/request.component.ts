@@ -13,6 +13,7 @@ export class RequestComponent implements OnInit {
   today: string;
   data: any;
   requestResponse = [];
+  generateData;
 
   constructor(
     private dataService: DataService,
@@ -24,6 +25,7 @@ export class RequestComponent implements OnInit {
     const dateObject = new Date();
     this.today = dateObject.getDate() + '/' + (dateObject.getMonth() + 1) + '/' + dateObject.getFullYear();
     this.getRequestData();
+    this.getGenerateData();
   }
 
   sendRequest(){
@@ -49,4 +51,10 @@ export class RequestComponent implements OnInit {
     });
   }
 
+  getGenerateData(){
+    this.requestService.getGeneratedData(this.today).subscribe(res => {
+      this.generateData = res;
+      console.log(res)
+    });
+  }
 }

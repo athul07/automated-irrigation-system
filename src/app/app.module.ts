@@ -16,17 +16,21 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
 import { DeleteComponent } from './messages/delete/delete.component';
+import { AuAuthLayoutComponent } from './components/au-auth-layout/au-auth-layout.component';
+import { HomeComponent } from './components/home/home.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     AuthLayoutComponent,
-    DeleteComponent
+    DeleteComponent,
+    AuAuthLayoutComponent,
+    HomeComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

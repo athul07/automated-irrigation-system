@@ -80,7 +80,7 @@ export class AuthService {
     this.dataService.removeStorage('user');
     this.dataService.removeStorage('isLoggedIn');
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
     window.location.reload();
   }
 

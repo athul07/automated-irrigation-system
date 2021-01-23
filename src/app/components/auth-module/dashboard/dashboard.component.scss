@@ -6,7 +6,7 @@
     height: 278px;
     position: relative;
     width: 95%;
-    margin: auto;
+    margin: 20px auto;
     display: flex;
     align-items: center;
     .card-heading{
@@ -29,8 +29,10 @@
     }
 }
 .generate-button{
-    position: absolute;
+    // position: absolute;
     bottom: 0;
-    width: 70%;
+    width: 220px;
     height: 50px;
+    text-align: center;
+    margin: 20px 0;
 }
