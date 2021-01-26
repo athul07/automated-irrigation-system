@@ -21,6 +21,7 @@ import { DeleteComponent } from './messages/delete/delete.component';
 import { AuAuthLayoutComponent } from './components/au-auth-layout/au-auth-layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,6 +12,17 @@ export class RequestService {
     return this.firestore.collection('requests', (ref) => ref.where('date', '==', addedAt).where('uid', '==', uid)).snapshotChanges();
   }
 
+  getRequestUserData(uid) {
+    return this.firestore.collection('requests', (ref) => ref.where('uid', '==', uid)).snapshotChanges();
+  }
+
+  editRequest(data, id) {
+    return this.firestore
+      .collection('requests')
+      .doc(id)
+      .set(data);
+  }
+
   sendRequest(data) {
     return new Promise<any>((resolve, reject) => {
       this.firestore
@@ -22,15 +33,19 @@ export class RequestService {
   }
 
   getRequestList(addedAt) {
-    return this.firestore.collection('requests', (ref) => ref.where('date', '==', addedAt)).snapshotChanges();
+    return this.firestore.collection('requests', (ref) => ref.where('date', '==', addedAt).orderBy('date_time', 'desc')).snapshotChanges();
   }
 
   getUserRequestList(uid) {
-    return this.firestore.collection('requests', (ref) => ref.where('uid', '==', uid)).snapshotChanges();
+    return this.firestore.collection('requests', (ref) => ref.where('uid', '==', uid).orderBy('date_time', 'desc')).snapshotChanges();
   }
 
   getWaterInDam(addedAt) {
     return this.firestore.collection('water_in_dam', (ref) => ref.where('date', '==', addedAt)).snapshotChanges();
+  }
+
+  getWaterInDamList() {
+    return this.firestore.collection('water_in_dam', (ref) => ref.orderBy('date_time', 'desc')).snapshotChanges();
   }
 
   setWaterInDam(data) {

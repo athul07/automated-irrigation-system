@@ -1,19 +1,49 @@
 <div class="container-fluid">
-    <table class="table" style="width: 100%; margin: 20px auto; border: solid;">
+    <div class="dropdown" style="    float: right; margin: 15px 0;">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{selectedDate}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a 
+                class="dropdown-item" 
+                style="cursor: pointer;"
+                *ngFor="let date of dateList; let i = index" 
+                (click)="selectDate(date.payload.doc.data().date)"
+            >{{date.payload.doc.data().date}}
+            </a>
+        </div>
+    </div>
+    <table class="table" style="width: 100%; margin: 20px 10px; border: solid;">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">NAME</th>
                 <th scope="col">METER ID</th>
                 <th scope="col">REQUESTED VALUE</th>
+                <th scope="col">AVERAGE USE</th>
+                <th scope="col">EDIT REQUEST</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let request of requestList; let i = index">
-                <th class="align-middle" scope="row">{{i+1}}</th>
+                <td class="align-middle" scope="row">{{i+1}}</td>
                 <td class="align-middle">{{ request.payload.doc.data().name }}</td>
                 <td class="align-middle">{{ request.payload.doc.data().meter_id }}</td>
                 <td class="align-middle">{{ request.payload.doc.data().request_value }}</td>
+                <td class="align-middle">{{ request.payload.doc.data().avg_use }}</td>
+                <td class="align-middle">
+                    <button 
+                        type="button" 
+                        class="btn btn-info" 
+                        (click)="edit(request.payload.doc.data(), request.payload.doc.id)"
+                        [disabled]="(generateData.length !== 0) || (selectedDate !== today)"
+                    >
+                        Edit
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="requestList.length === 0">
+                <td colspan="6" class="align-middle text-center">No data found!</td>
             </tr>
         </tbody>
     </table>

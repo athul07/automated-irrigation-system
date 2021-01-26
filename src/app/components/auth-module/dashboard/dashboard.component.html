@@ -47,6 +47,7 @@
                         <th scope="col">NAME</th>
                         <th scope="col">METER ID</th>
                         <th scope="col">REQUESTED VALUE</th>
+                        <th scope="col">AVERAGE USE</th>
                         <th scope="col">FLOWING RATE</th>
                         <th scope="col">TIME REMAINING</th>
                         <th scope="col">SLIP METER STATUS</th>
@@ -58,12 +59,16 @@
                         <td class="align-middle">{{ request.payload.doc.data().name }}</td>
                         <td class="align-middle">{{ request.payload.doc.data().meter_id }}</td>
                         <td class="align-middle">{{ request.payload.doc.data().request_value }}</td>
+                        <td class="align-middle">{{ request.payload.doc.data().avg_use }}</td>
                         <td class="align-middle">5 Unit/min</td>
                         <td class="align-middle">{{ request.remaining_time }} Min</td>
                         <td class="align-middle">
                             <span style="color: red;" *ngIf="!request.remaining_time">Closed</span> 
                             <span style="color: #58fb00;;" *ngIf="request.remaining_time">Open</span> 
                         </td>
+                    </tr>
+                    <tr *ngIf="requestList.length === 0">
+                        <td colspan="8" class="align-middle text-center">No data found!</td>
                     </tr>
                 </tbody>
             </table>

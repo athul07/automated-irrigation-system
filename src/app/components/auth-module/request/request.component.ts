@@ -14,6 +14,8 @@ export class RequestComponent implements OnInit {
   data: any;
   requestResponse = [];
   generateData;
+  totalRequestList = [];
+  avgUse;
 
   constructor(
     private dataService: DataService,
@@ -26,15 +28,18 @@ export class RequestComponent implements OnInit {
     this.today = dateObject.getDate() + '/' + (dateObject.getMonth() + 1) + '/' + dateObject.getFullYear();
     this.getRequestData();
     this.getGenerateData();
+    this.findAvgUse();
   }
 
   sendRequest(){
     this.data = {
       date: this.today,
+      date_time: new Date(),
       uid: this.user.userid,
       name: this.user.name,
       meter_id: this.user.meter_id,
-      request_value: this.requestData
+      request_value: this.requestData,
+      avg_use: this.avgUse
     }
     this.requestService.sendRequest(this.data).then(()=>{
       console.log('send Request')
@@ -48,6 +53,21 @@ export class RequestComponent implements OnInit {
     this.requestService.getRequestData(this.today, this.user.userid).subscribe(res => {
       this.requestResponse = res;
       console.log(res)
+    });
+  }
+
+  findAvgUse(){
+    this.requestService.getRequestUserData(this.user.userid).subscribe(res => {
+      this.totalRequestList = res;
+      if(this.totalRequestList.length) {
+        var sum = 0;
+        this.totalRequestList.forEach((item)=>{
+          sum = sum + item.payload.doc.data().request_value
+        });
+        this.avgUse = sum/(this.totalRequestList.length);
+      } else {
+        this.avgUse = 0;
+      }
     });
   }
 

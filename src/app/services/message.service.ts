@@ -17,7 +17,8 @@ export class MessageService {
     });
   }
 
-  getMessages(addedAt) {
-    return this.firestore.collection('messages', (ref) => ref.where('date', '==', addedAt)).snapshotChanges();
+  getMessages(addedAt, userType) {
+    const type = (userType === 'admin') ? 'user' : 'admin' ;
+    return this.firestore.collection('messages', (ref) => ref.where('date', '==', addedAt).where('user_type', '==', type)).snapshotChanges();
   }
 }

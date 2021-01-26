@@ -12,6 +12,7 @@ import { RequestComponent } from './request/request.component';
 import { ConsumptionComponent } from './consumption/consumption.component';
 import { MessageComponent } from './message/message.component';
 import { GenerateComponent } from './generate/generate.component';
+import { EditRequestComponent } from './edit-request/edit-request.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { GenerateComponent } from './generate/generate.component';
     RequestComponent,
     ConsumptionComponent,
     MessageComponent,
-    GenerateComponent
+    GenerateComponent,
+    EditRequestComponent
   ],
   imports: [
     CommonModule,

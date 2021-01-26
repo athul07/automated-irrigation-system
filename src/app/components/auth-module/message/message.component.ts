@@ -27,7 +27,10 @@ export class MessageComponent implements OnInit {
       date: this.today,
       uid: this.user.userid,
       message: this.message,
-      date_time: new Date()
+      date_time: new Date(),
+      user_type: this.user.user_type,
+      user: this.user.name ? this.user.name : "",
+      meter_id: ((this.user.user_type === 'user') ? this.user.meter_id : 0)
     }
     this.messageService.sendMessage(data).then(()=>{
       console.log('send Message');
@@ -39,7 +42,7 @@ export class MessageComponent implements OnInit {
   }
 
   getMessages(){
-    this.messageService.getMessages(this.today).subscribe(res => {
+    this.messageService.getMessages(this.today, this.user.user_type).subscribe(res => {
       this.messageList = res;
     });
   }

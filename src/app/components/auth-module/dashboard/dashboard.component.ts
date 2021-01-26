@@ -10,7 +10,7 @@ import { DataService } from '../../../shared/services/data.service';
 export class DashboardComponent implements OnInit {
   isGenerated: boolean = false;
   today: string;
-  requestList: any;
+  requestList = [];
   totalRequest: number = 0;
   waterInDam: any[] = [];
   data: any;
@@ -71,7 +71,8 @@ export class DashboardComponent implements OnInit {
         const data = {
           date: this.today,
           water_level: Math.floor(Math.random() * 1000) + 100000,
-          water_rate: Math.floor(Math.random() * 10) + 10
+          water_rate: Math.floor(Math.random() * 10) + 10,
+          date_time: new Date()
         }
         this.requestService.setWaterInDam(data).then(()=>{
           console.log('wwwww')

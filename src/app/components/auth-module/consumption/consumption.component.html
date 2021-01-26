@@ -7,6 +7,7 @@
                 <th scope="col">METER ID</th>
                 <th scope="col">DATE</th>
                 <th scope="col">REQUESTED VALUE</th>
+                <th scope="col">AVERAGE USE</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,10 @@
                 <td class="align-middle">{{ request.payload.doc.data().meter_id }}</td>
                 <td class="align-middle">{{ request.payload.doc.data().date }}</td>
                 <td class="align-middle">{{ request.payload.doc.data().request_value }}</td>
+                <td class="align-middle">{{ request.payload.doc.data().avg_use }}</td>
+            </tr>
+            <tr *ngIf="requestList.length === 0">
+                <td colspan="6" class="align-middle text-center">No data found!</td>
             </tr>
         </tbody>
     </table>

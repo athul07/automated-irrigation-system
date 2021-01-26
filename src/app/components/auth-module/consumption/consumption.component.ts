@@ -8,10 +8,10 @@ import { DataService } from '../../../shared/services/data.service';
   styleUrls: ['./consumption.component.scss']
 })
 export class ConsumptionComponent implements OnInit {
-  requestList: any;
+  requestList = [];
   user: any;
 
-  constructor(private requestService: RequestService, private dataService: DataService,) { }
+  constructor(private requestService: RequestService, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.user = this.dataService.getUserDetails();
@@ -23,5 +23,4 @@ export class ConsumptionComponent implements OnInit {
       this.requestList = res;
     });
   }
-
 }

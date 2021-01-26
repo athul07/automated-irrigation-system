@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   errorMessage: string = '';
   error: { name: string, message: string } = { name: '', message: '' };
+  showLoader = false;
 
   constructor(
     private authService: AuthService,
@@ -23,9 +24,10 @@ export class LoginComponent implements OnInit {
 
   login(){
     if(this.validateForm(this.email, this.password) ){
-      console.log("loginn")
+      this.showLoader = true;
       this.authService.loginWithEmail(this.email, this.password).then(()=>{
         // this.router.navigateByUrl('/dashboard');
+        this.showLoader = false;
         console.log("logged in.....")
       }).catch(_error => {
         this.error = _error;
