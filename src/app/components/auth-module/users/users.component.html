@@ -18,7 +18,9 @@
         <tbody>
             <tr *ngFor="let user of userList; let i = index">
                 <th class="align-middle" scope="row">{{i+1}}</th>
-                <td class="align-middle">{{ user.payload.doc.data().name }}</td>
+                <td class="align-middle user-name-link" (click)="getUserConsumption(user.payload.doc.data().userid)">
+                    {{ user.payload.doc.data().name }}
+                </td>
                 <td class="align-middle">{{ user.payload.doc.data().meter_id }}</td>
                 <td class="align-middle">{{ user.payload.doc.data().email }}</td>
                 <td class="align-middle">{{ user.payload.doc.data().phone }}</td>

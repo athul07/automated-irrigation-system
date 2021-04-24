@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
 import { UserService } from '../../../services/user.service';
 import { DeleteComponent } from '../../../messages/delete/delete.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -15,6 +16,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private userService: UserService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +53,10 @@ export class UsersComponent implements OnInit {
         
       }
     });
+  }
+
+  getUserConsumption(id){
+    this.router.navigateByUrl(`consumption?user_id=${id}`);
   }
 
 }

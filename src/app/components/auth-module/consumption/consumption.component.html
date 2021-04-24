@@ -1,4 +1,9 @@
 <div class="container-fluid">
+    <div class="row my-4" *ngIf="userId">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-outline-dark float-left" (click)="backToUserList()"> < Back to User List</button>
+        </div>
+    </div>
     <table class="table" style="width: 100%; margin: 20px auto; border: solid;">
         <thead>
             <tr>
