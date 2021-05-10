@@ -54,7 +54,6 @@ export class RequestComponent implements OnInit {
   getRequestData(){
     this.requestService.getRequestData(this.today, this.user.userid).subscribe(res => {
       this.requestResponse = res;
-      console.log(res)
     });
   }
 
@@ -76,7 +75,6 @@ export class RequestComponent implements OnInit {
   getGenerateData(){
     this.requestService.getGeneratedData(this.today).subscribe(res => {
       this.generateData = res;
-      console.log(res)
     });
   }
 }

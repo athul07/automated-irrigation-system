@@ -29,7 +29,6 @@ export class EditRequestComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log('a', this.data, this.docId)
   }
 
   edit(){

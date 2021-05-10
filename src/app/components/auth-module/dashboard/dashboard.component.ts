@@ -67,7 +67,6 @@ export class DashboardComponent implements OnInit {
       this.requestList.forEach((item) => {
         item.water_rate = this.subGateList.filter((x)=> x.payload.doc.id === item.payload.doc.data().sub_gate_id )[0].payload.doc.data().water_rate;
       });
-      console.log('t', this.requestList)
     });
   }
 
@@ -88,7 +87,6 @@ export class DashboardComponent implements OnInit {
           date_time: new Date()
         }
         this.requestService.setWaterInDam(data).then(()=>{
-          console.log('wwwww')
         }).catch(_error => {
           // this.error = _error;
           // console.log(this.error)
@@ -112,7 +110,6 @@ export class DashboardComponent implements OnInit {
       water_rate: this.waterRate
     }
     this.requestService.generateAction(this.data).then(()=>{
-      console.log('generated')
       this.isGenerated = true;
       this.now = new Date();
     }).catch(_error => {

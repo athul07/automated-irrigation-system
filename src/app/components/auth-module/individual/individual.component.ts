@@ -55,7 +55,6 @@ export class IndividualComponent implements OnInit {
   getDateList() {
     this.requestService.getWaterInDamList().subscribe(res => {
       this.dateList = res;
-      console.log(this.dateList)
     });
   }
 
