@@ -19,6 +19,7 @@
                 <th scope="col">#</th>
                 <th scope="col">NAME</th>
                 <th scope="col">METER ID</th>
+                <th scope="col">SUB GATE</th>
                 <th scope="col">REQUESTED VALUE</th>
                 <th scope="col">AVERAGE USE</th>
                 <th scope="col">EDIT REQUEST</th>
@@ -29,6 +30,7 @@
                 <td class="align-middle" scope="row">{{i+1}}</td>
                 <td class="align-middle">{{ request.payload.doc.data().name }}</td>
                 <td class="align-middle">{{ request.payload.doc.data().meter_id }}</td>
+                <td class="align-middle">{{ request.payload.doc.data().sub_gate_name }}</td>
                 <td class="align-middle">{{ request.payload.doc.data().request_value }}</td>
                 <td class="align-middle">{{ request.payload.doc.data().avg_use }}</td>
                 <td class="align-middle">

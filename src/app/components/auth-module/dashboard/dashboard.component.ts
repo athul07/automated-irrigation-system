@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../../services/request.service';
 import { DataService } from '../../../shared/services/data.service';
+import { GateService } from '../../../services/gate.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,8 +19,10 @@ export class DashboardComponent implements OnInit {
   generateData = [];
   now: any;
   remainingTime = 1;
+  waterRate = 50;
+  subGateList = [];
 
-  constructor(private requestService: RequestService, private dataService: DataService,) {
+  constructor(private requestService: RequestService, private dataService: DataService, private gateService: GateService,) {
     setInterval(() => {
       this.now = new Date();
       if(this.generateData.length !== 0){
@@ -33,7 +36,7 @@ export class DashboardComponent implements OnInit {
         }
         this.requestList.forEach((x)=>{
           var tt = this.generateData[0]?.payload.doc.data().date_time.toDate()
-          tt.setMinutes( tt.getMinutes() +  (x.payload.doc.data().request_value/5));
+          tt.setMinutes( tt.getMinutes() +  (x.payload.doc.data().request_value/x.water_rate));
           if(tt > this.now) {
             var hourDiff = tt - this.now;
             var diffHrs = Math.floor((hourDiff % 86400000) / 3600000);
@@ -52,7 +55,7 @@ export class DashboardComponent implements OnInit {
     this.user = this.dataService.getUserDetails();
     const dateObject = new Date();
     this.today = dateObject.getDate() + '/' + (dateObject.getMonth() + 1) + '/' + dateObject.getFullYear();
-    this.getRequestList();
+    this.getGateList();
     this.getWaterInDam();
     this.getGenerateData();
   }
@@ -61,6 +64,17 @@ export class DashboardComponent implements OnInit {
     this.requestService.getRequestList(this.today).subscribe(res => {
       this.requestList = res;
       this.totalRequest = this.requestList.reduce((sum, current) => sum + current.payload.doc.data().request_value, 0);
+      this.requestList.forEach((item) => {
+        item.water_rate = this.subGateList.filter((x)=> x.payload.doc.id === item.payload.doc.data().sub_gate_id )[0].payload.doc.data().water_rate;
+      });
+      console.log('t', this.requestList)
+    });
+  }
+
+  getGateList(){
+    this.gateService.getGetList().subscribe(res => {
+      this.subGateList = res;
+      this.getRequestList();
     });
   }
 
@@ -70,8 +84,7 @@ export class DashboardComponent implements OnInit {
       if(this.waterInDam.length === 0){
         const data = {
           date: this.today,
-          water_level: Math.floor(Math.random() * 1000) + 100000,
-          water_rate: Math.floor(Math.random() * 10) + 10,
+          water_level: Math.floor(Math.random() * 100000) + 1000000,
           date_time: new Date()
         }
         this.requestService.setWaterInDam(data).then(()=>{
@@ -87,7 +100,7 @@ export class DashboardComponent implements OnInit {
   generate(){
     // this.isGenerated = !this.isGenerated;
     var dateTime = new Date();
-    dateTime.setMinutes( dateTime.getMinutes() + Math.round(this.totalRequest/this.waterInDam[0]?.payload.doc.data().water_rate) );
+    dateTime.setMinutes( dateTime.getMinutes() + Math.round(this.totalRequest/this.waterRate) );
     this.data = {
       date: this.today,
       uid: this.user.userid,
@@ -95,7 +108,8 @@ export class DashboardComponent implements OnInit {
       water_in_dam: this.waterInDam[0]?.payload.doc.data().water_level,
       total_request: this.totalRequest,
       date_time: new Date(),
-      end_time: dateTime
+      end_time: dateTime,
+      water_rate: this.waterRate
     }
     this.requestService.generateAction(this.data).then(()=>{
       console.log('generated')
@@ -110,6 +124,22 @@ export class DashboardComponent implements OnInit {
   getGenerateData() {
     this.requestService.getGeneratedData(this.today).subscribe(res => {
       this.generateData = res;
+      // console.log(this.generateData[0].payload.doc.data().water_rate)
+      if ((this.generateData.length > 0)) {
+        this.waterRate = this.generateData[0].payload.doc.data().water_rate;
+        this.isGenerated = true;
+      } else {
+        this.waterRate = 50;
+        this.isGenerated = false;
+      }
     });
+  }
+
+  checkWaterRate() {
+    if (!this.waterRate || (this.waterRate < 50)) {
+      this.waterRate = 50;
+    } else if ((this.waterRate > 150)) {
+      this.waterRate = 150;
+    }
   }
 }

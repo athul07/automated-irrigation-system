@@ -25,6 +25,19 @@
                         <input type="text" name="meterId" class="form-control" id="meterId" [(ngModel)]="meterId" required autocomplete="off">
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="subGate">Sub Gate:</label>
+                        <select 
+                            name="subGate" 
+                            id="subGate" 
+                            class="form-control"
+                            [(ngModel)]="subGate"
+                        >
+                            <option *ngFor="let gate of subGateList; let i = index" [value]="i">{{ gate.payload.doc.data().gate_name }}</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">

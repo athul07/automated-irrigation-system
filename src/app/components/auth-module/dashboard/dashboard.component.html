@@ -1,5 +1,22 @@
 <div class="container-fluid">
-    <div class="row mt-5" *ngIf="generateData.length === 0">
+    <div class="row mt-5 px-3" *ngIf="!isGenerated">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="phone">Water Rate(Unit/min)</label>
+                <input 
+                    type="number" 
+                    name="water-rate" 
+                    class="form-control" 
+                    id="water-rate" 
+                    min="50"
+                    max="150"
+                    (blur)="checkWaterRate()"
+                    [(ngModel)]="waterRate" required
+                >
+            </div>
+        </div>
+    </div>  
+    <div class="row" *ngIf="!isGenerated">
         <div class="col-md-6 text-center">
             <div class="dashboard-card">
                 <div class="card-body">
@@ -22,12 +39,12 @@
             <button type="button" class="btn btn-primary generate-button" (click)="generate()">Generate</button>
         </div>
     </div>
-    <div class="row mt-5" *ngIf="generateData.length !== 0">
+    <div class="row mt-5" *ngIf="isGenerated">
         <div class="col-md-6 text-center">
             <div class="dashboard-card">
                 <div class="card-body">
                     <p class="card-heading">WATER FLOWING RATE</p>
-                    <p class="card-value value-in">{{waterInDam[0]?.payload.doc.data().water_rate}} <span>Unit/min</span></p>
+                    <p class="card-value value-in">{{waterRate}} <span>Unit/min</span></p>
                 </div>
             </div>
         </div>
@@ -36,7 +53,7 @@
             <div class="dashboard-card">
                 <div class="card-body">
                     <p class="card-heading">TIME REMAINING</p>
-                    <p class="card-value value-out">{{remainingTime}} <span>Min</span></p>
+                    <p class="card-value" [ngStyle]="{'color': (remainingTime) ? '#58fb00' : 'red'}">{{remainingTime}} <span>Min</span></p>
                 </div>
             </div>
         </div>
@@ -48,6 +65,7 @@
                         <th scope="col">METER ID</th>
                         <th scope="col">REQUESTED VALUE</th>
                         <th scope="col">AVERAGE USE</th>
+                        <th scope="col">SUB GATE</th>
                         <th scope="col">FLOWING RATE</th>
                         <th scope="col">TIME REMAINING</th>
                         <th scope="col">SLIP METER STATUS</th>
@@ -60,7 +78,8 @@
                         <td class="align-middle">{{ request.payload.doc.data().meter_id }}</td>
                         <td class="align-middle">{{ request.payload.doc.data().request_value }}</td>
                         <td class="align-middle">{{ request.payload.doc.data().avg_use }}</td>
-                        <td class="align-middle">5 Unit/min</td>
+                        <td class="align-middle">{{ request.payload.doc.data().sub_gate_name }}</td>
+                        <td class="align-middle">{{ request.water_rate }} Unit/min</td>
                         <td class="align-middle">{{ request.remaining_time }} Min</td>
                         <td class="align-middle">
                             <span style="color: red;" *ngIf="!request.remaining_time">Closed</span> 

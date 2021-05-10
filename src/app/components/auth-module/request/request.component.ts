@@ -38,6 +38,8 @@ export class RequestComponent implements OnInit {
       uid: this.user.userid,
       name: this.user.name,
       meter_id: this.user.meter_id,
+      sub_gate_name: this.user.sub_gate_name,
+      sub_gate_id: this.user.sub_gate_id,
       request_value: this.requestData,
       avg_use: this.avgUse
     }

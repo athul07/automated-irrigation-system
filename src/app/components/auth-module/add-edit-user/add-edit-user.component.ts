@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog } from "@angular/material/dialog";
 import { UserService } from '../../../services/user.service';
+import { GateService } from '../../../services/gate.service';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -15,6 +16,8 @@ export class AddEditUserComponent implements OnInit {
   phone: number;
   name: string = '';
   data: any;
+  subGate: any;
+  subGateList = [];
 
   errorMessage: string = '';
   error: { name: string, message: string } = { name: '', message: '' };
@@ -22,9 +25,11 @@ export class AddEditUserComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddEditUserComponent>,
     private authService: UserService,
+    private gateService: GateService,
   ) { }
 
   ngOnInit(): void {
+    this.getGateList();
   }
 
   register(){
@@ -36,12 +41,13 @@ export class AddEditUserComponent implements OnInit {
       meter_id: this.meterId,
       user_type: 'user',
       password: this.password,
-      added_at: new Date()
+      added_at: new Date(),
+      sub_gate_name: this.subGateList[+this.subGate].payload.doc.data().gate_name,
+      sub_gate_id: this.subGateList[+this.subGate].payload.doc.id
     }
     this.clearErrorMessage();
     if(this.validateForm(this.email, this.password) ){
       this.authService.registerWithEmail(this.email, this.password, this.data).then(()=>{
-        // console.log('registerrr')
         this.dialogRef.close();
         // this.router.navigate[('/home')]
       }).catch(_error => {
@@ -70,5 +76,12 @@ export class AddEditUserComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  getGateList() {
+    this.gateService.getGetList().subscribe(res => {
+      this.subGateList = res;
+      this.subGate = 0;
+    });
   }
 }

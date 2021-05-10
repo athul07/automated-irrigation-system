@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row my-4">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-dark float-right" (click)="addNewGate()">Add Sub Gate</button>
+        </div>
+    </div>
+    <table class="table" style="width: 100%; margin: 20px auto; border: solid;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">SUB GATE NAME</th>
+                <th scope="col">WATER RATE</th>
+                <th scope="col">CREATED DATE</th>
+                <th scope="col">ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of gateList; let i = index">
+                <th class="align-middle" scope="row">{{i+1}}</th>
+                <td class="align-middle">
+                    {{ user.payload.doc.data().gate_name }}
+                </td>
+                <td class="align-middle">{{ user.payload.doc.data().water_rate }}</td>
+                <td class="align-middle">{{ user.payload.doc.data().added_at.toDate() | date : 'dd/MM/yyyy, h:mm a' }}</td>
+                <td class="align-middle">
+                    <button type="button" class="btn btn-info" (click)="edit(user.payload.doc.data(), user.payload.doc.id)">
+                        Edit
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="gateList.length === 0">
+                <td colspan="6" class="align-middle text-center">No data found!</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

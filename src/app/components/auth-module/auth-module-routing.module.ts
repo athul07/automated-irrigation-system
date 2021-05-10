@@ -7,6 +7,7 @@ import { UsersComponent } from './users/users.component';
 import { RequestComponent } from './request/request.component';
 import { ConsumptionComponent } from './consumption/consumption.component';
 import { MessageComponent } from './message/message.component';
+import { SubGatesComponent } from './sub-gates/sub-gates.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+  },
+  {
+    path: 'sub-gates',
+    component: SubGatesComponent,
   },
   {
     path: 'request',

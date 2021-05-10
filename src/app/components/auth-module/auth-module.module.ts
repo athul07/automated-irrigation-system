@@ -13,6 +13,8 @@ import { ConsumptionComponent } from './consumption/consumption.component';
 import { MessageComponent } from './message/message.component';
 import { GenerateComponent } from './generate/generate.component';
 import { EditRequestComponent } from './edit-request/edit-request.component';
+import { SubGatesComponent } from './sub-gates/sub-gates.component';
+import { AddEditSubGateComponent } from './add-edit-sub-gate/add-edit-sub-gate.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { EditRequestComponent } from './edit-request/edit-request.component';
     ConsumptionComponent,
     MessageComponent,
     GenerateComponent,
-    EditRequestComponent
+    EditRequestComponent,
+    SubGatesComponent,
+    AddEditSubGateComponent
   ],
   imports: [
     CommonModule,
