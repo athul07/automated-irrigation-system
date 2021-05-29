@@ -10,6 +10,7 @@
                 <th scope="col">#</th>
                 <th scope="col">NAME</th>
                 <th scope="col">METER ID</th>
+                <th scope="col">SUB GATE</th>
                 <th scope="col">EMAIL</th>
                 <th scope="col">PHONE</th>
                 <th scope="col">ACTION</th>
@@ -22,12 +23,13 @@
                     {{ user.payload.doc.data().name }}
                 </td>
                 <td class="align-middle">{{ user.payload.doc.data().meter_id }}</td>
+                <td class="align-middle">{{ user.payload.doc.data().sub_gate_name }}</td>
                 <td class="align-middle">{{ user.payload.doc.data().email }}</td>
                 <td class="align-middle">{{ user.payload.doc.data().phone }}</td>
                 <td class="align-middle"><button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button></td>
             </tr>
             <tr *ngIf="userList.length === 0">
-                <td colspan="6" class="align-middle text-center">No data found!</td>
+                <td colspan="7" class="align-middle text-center">No data found!</td>
             </tr>
         </tbody>
     </table>

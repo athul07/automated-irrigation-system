@@ -2,15 +2,12 @@
     <div class="row mt-5 px-3" *ngIf="!isGenerated">
         <div class="col-md-3">
             <div class="form-group">
-                <label for="phone">Water Rate(Unit/min)</label>
+                <label for="phone">DAM - Water Rate(Unit/min)</label>
                 <input 
                     type="number" 
                     name="water-rate" 
                     class="form-control" 
                     id="water-rate" 
-                    min="50"
-                    max="150"
-                    (blur)="checkWaterRate()"
                     [(ngModel)]="waterRate" required
                 >
             </div>
@@ -79,7 +76,7 @@
                         <td class="align-middle">{{ request.payload.doc.data().request_value }}</td>
                         <td class="align-middle">{{ request.payload.doc.data().avg_use }}</td>
                         <td class="align-middle">{{ request.payload.doc.data().sub_gate_name }}</td>
-                        <td class="align-middle">{{ request.water_rate }} Unit/min</td>
+                        <td class="align-middle">{{ request.water_rate | number  : '1.2-2' }} Unit/min</td>
                         <td class="align-middle">{{ request.remaining_time }} Min</td>
                         <td class="align-middle">
                             <span style="color: red;" *ngIf="!request.remaining_time">Closed</span> 

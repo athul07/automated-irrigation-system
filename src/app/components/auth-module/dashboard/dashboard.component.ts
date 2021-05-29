@@ -63,9 +63,16 @@ export class DashboardComponent implements OnInit {
   getRequestList(){
     this.requestService.getRequestList(this.today).subscribe(res => {
       this.requestList = res;
+      var totalGateRequest = {};
+      this.requestList.forEach((item) => {
+        totalGateRequest[item.payload.doc.data().sub_gate_id] = totalGateRequest.hasOwnProperty(item.payload.doc.data().sub_gate_id) 
+          ? (totalGateRequest[item.payload.doc.data().sub_gate_id] + item.payload.doc.data().request_value)
+          : item.payload.doc.data().request_value;
+      });
+      console.log('dd', totalGateRequest)
       this.totalRequest = this.requestList.reduce((sum, current) => sum + current.payload.doc.data().request_value, 0);
       this.requestList.forEach((item) => {
-        item.water_rate = this.subGateList.filter((x)=> x.payload.doc.id === item.payload.doc.data().sub_gate_id )[0].payload.doc.data().water_rate;
+        item.water_rate = item.payload.doc.data().request_value * this.subGateList.filter((x)=> x.payload.doc.id === item.payload.doc.data().sub_gate_id )[0].payload.doc.data().water_rate / totalGateRequest[item.payload.doc.data().sub_gate_id];
       });
     });
   }
@@ -121,7 +128,6 @@ export class DashboardComponent implements OnInit {
   getGenerateData() {
     this.requestService.getGeneratedData(this.today).subscribe(res => {
       this.generateData = res;
-      // console.log(this.generateData[0].payload.doc.data().water_rate)
       if ((this.generateData.length > 0)) {
         this.waterRate = this.generateData[0].payload.doc.data().water_rate;
         this.isGenerated = true;
@@ -132,11 +138,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  checkWaterRate() {
-    if (!this.waterRate || (this.waterRate < 50)) {
-      this.waterRate = 50;
-    } else if ((this.waterRate > 150)) {
-      this.waterRate = 150;
-    }
-  }
+  // checkWaterRate() {
+  //   if (!this.waterRate || (this.waterRate < 50)) {
+  //     this.waterRate = 50;
+  //   } else if ((this.waterRate > 150)) {
+  //     this.waterRate = 150;
+  //   }
+  // }
 }
