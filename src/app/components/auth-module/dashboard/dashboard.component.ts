@@ -72,6 +72,7 @@ export class DashboardComponent implements OnInit {
       console.log('dd', totalGateRequest)
       this.totalRequest = this.requestList.reduce((sum, current) => sum + current.payload.doc.data().request_value, 0);
       this.requestList.forEach((item) => {
+        item.sub_gate_rate = this.subGateList.filter((x)=> x.payload.doc.id === item.payload.doc.data().sub_gate_id )[0].payload.doc.data().water_rate;
         item.water_rate = item.payload.doc.data().request_value * this.subGateList.filter((x)=> x.payload.doc.id === item.payload.doc.data().sub_gate_id )[0].payload.doc.data().water_rate / totalGateRequest[item.payload.doc.data().sub_gate_id];
       });
     });

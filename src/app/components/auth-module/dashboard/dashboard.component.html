@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-            <table class="table" style="margin: 40px auto; width: 80%; border: solid;">
+            <table class="table" style="margin: 40px auto; width: 95%; border: solid;">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -62,8 +62,8 @@
                         <th scope="col">METER ID</th>
                         <th scope="col">REQUESTED VALUE</th>
                         <th scope="col">AVERAGE USE</th>
-                        <th scope="col">SUB GATE</th>
-                        <th scope="col">FLOWING RATE</th>
+                        <th scope="col">SUB GATE <br><span style="font-size: 12px;">(FLOWING RATE)</span> </th>
+                        <th scope="col">USER <br> FLOWING RATE</th>
                         <th scope="col">TIME REMAINING</th>
                         <th scope="col">SLIP METER STATUS</th>
                     </tr>
@@ -75,7 +75,7 @@
                         <td class="align-middle">{{ request.payload.doc.data().meter_id }}</td>
                         <td class="align-middle">{{ request.payload.doc.data().request_value }}</td>
                         <td class="align-middle">{{ request.payload.doc.data().avg_use }}</td>
-                        <td class="align-middle">{{ request.payload.doc.data().sub_gate_name }}</td>
+                        <td class="align-middle">{{ request.payload.doc.data().sub_gate_name }} <br> <span style="font-size: 12px;">({{request.sub_gate_rate}} Unit/min)</span></td>
                         <td class="align-middle">{{ request.water_rate | number  : '1.2-2' }} Unit/min</td>
                         <td class="align-middle">{{ request.remaining_time }} Min</td>
                         <td class="align-middle">
